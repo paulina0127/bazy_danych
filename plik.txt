@@ -1,3 +1,7 @@
 Bazy Danych 
 Grupa 2 
+<<<<<<< HEAD
 4.11.2020
+=======
+Ala ma kota
+>>>>>>> dev
