@@ -19,3 +19,19 @@ alter table postac add primary key(pesel);
 Zad. 3
 1) update postac set statek='Orka' where nazwa like '%a%';
 2) update statek set max_ladownosc=max_ladownosc*0.7 where data_wodowania between '1901-01-01' and '2000-12-31';
+3) alter table postac add check (wiek < 1000);
+
+Zad. 4
+1) alter table postac modify rodzaj enum('wiking','ptak','kobieta','syrena','waz');
+insert into postac values (10,'Loko','waz','1700-04-18','200', null, null,'56790845321');
+2) create table marynarz select * from postac;
+create table marynarz_1 like postac; 
+delete from marzynarz where id_postaci=10;
+
+Zad. 5
+1) update postac set statek=null where id_postaci in (1,2,3,4,5,6,7,8,9);
+2) delete from postac where id_postaci=7;
+3) delete from statek where nazwa_statku in ('Orka','Lew');
+4) drop table statek;
+5) create table zwierz (id int auto_increment primary key, nazwa varchar(45), wiek int);
+6) insert into zwierz select id_postaci, nazwa, wiek from postac where rodzaj in ('ptak','waz');
