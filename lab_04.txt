@@ -4,7 +4,7 @@ delete from postac where id_postaci=6;
 delete from postac where id_postaci=8;
 2) alter table izba drop foreign key izba_ibfk_1;
 alter table przetwory drop foreign key przetwory_ibfk_1;
-alter table przetwory drop foreign key przetwory_ eibfk_2;
+alter table przetwory drop foreign key przetwory_ ibfk_2;
 alter table walizka drop foreign key walizka_ibfk_1;
 alter table postac modify id_postaci int;
 alter table postac drop primary key;
