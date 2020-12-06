@@ -1,0 +1,54 @@
+Zad. 1
+
+1) create table kreatura2 like wikingowie.kreatura;
+
+insert into kreatura2 select * from wikingowie.kreatura;
+
+
+create table etapy_wyprawy like wikingowie.etapy_wyprawy;
+
+insert into etapy_wyprawy select * from wikingowie.etapy_wyprawy;
+
+
+create table uczestnicy like wikingowie.uczestnicy;
+
+insert into uczestnicy select * from wikingowie.uczestnicy;
+
+create table wyprawa like wikingowie.wyprawa;
+
+insert into wyprawa select * from wikingowie.wyprawa;
+
+
+create table sektor like wikingowie.sektor;
+
+insert into sektor select * from wikingowie.sektor;
+
+2) select k.nazwa, u.id_uczestnika from kreatura as k left join uczestnicy as u on k.idKreatury=u.id_uczestnika where u.id_uczestnika is null;
+
+
+
+Zad. 2
+
+1) select rodzaj, nazwa group_concat(nazwa separator ' - ') from kreatura group by rodzaj;
+
+select w.nazwa, count(u.id_uczestnika), group_concat(k.nazwa separator ' - ')
+from wyprawa as w, uczestnicy as u, kreatura as k
+where w.id_wyprawy=u.id_wyprawy and u.id_uczestnika=k.idKreatury
+group by w.nazwa;
+
+2) select et.idEtapu, s.nazwa, k.nazwa from etapy_wyprawy et, wyprawa w, sektor s, kreatura k where et.idWyprawy=w.id_wyprawy
+and et.sektor=s.id_sektora and w.kierownik=k.idKreatury order by w.data_rozpoczecia, et.kolejnosc;
+
+
+
+Zad. 3
+
+1) select id_sektora, count(idEtapu) as odwiedzony from sektor s left join etapy_wyprawy e on e.sektor=s.id_sektora group by id_sektora;
+
+2) select nazwa,if(count(id_uczestnika)>0,"bral udzial w wyprawie","nie bral udzialu w wyprawie") from kreatura left join uczestnicy on idKreatury=id_uczestnika group by nazwa;
+
+
+
+Zad. 4
+
+1) select w.nazwa, sum(length(e.dziennik)) as suma from etapy_wyprawy as e, wyprawa as w where e.idWyprawy=w.id_wyprawy group by nazwa having sum(length(e.dziennik)) < 400;
