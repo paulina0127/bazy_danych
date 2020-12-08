@@ -1,0 +1,26 @@
+Zad. 1
+DELIMITER //
+CREATE TRIGGER kreatura_before_insert_update
+BEFORE INSERT ON kreatura
+FOR EACH ROW
+BEGIN
+  IF NEW.waga < 0
+  THEN
+    SET NEW.waga = 0;
+  END IF;
+END
+//
+DELIMITER ;
+
+Zad. 2
+DELIMITER $$  
+
+CREATE TRIGGER wyprawa_after_delete
+AFTER DELETE ON wyprawa
+FOR EACH ROW
+BEGIN
+  INSERT INTO archiwum_wypraw SELECT w.id_wyprawy, w.nazwa, w.data_rozpoczecia, w.data_zakonczenia, k.nazwa from wyprawa w, kreatura k WHERE w.kierownik=k.idKreatury AND w.id_wyprawy=old.id_wyprawy;
+END
+$$   
+  
+DELIMITER ;

@@ -52,3 +52,8 @@ Zad. 3
 Zad. 4
 
 1) select w.nazwa, sum(length(e.dziennik)) as suma from etapy_wyprawy as e, wyprawa as w where e.idWyprawy=w.id_wyprawy group by nazwa having sum(length(e.dziennik)) < 400;
+
+2) select w.nazwa, sum(e.ilosc*z.waga)/count(u.id_uczestnika) as œrednia_waga from wyprawa as w, zasob as z, uczestnicy as u inner join ekwipunek as e on u.id_uczestnika=e.idKreatury where u.id_wyprawy=w.id_wyprawy and z.idZasobu=e.idZasobu group by w.nazwa;
+
+Zad. 5
+1) select k.nazwa, datediff(w.data_rozpoczecia, k.dataUr) as dni from  uczestnicy as u inner join kreatura as k inner join wyprawa as w inner join etapy_wypraw as ew on w.id_wyprawy=u.id_wyprawy and u.id_uczestnika=k.idKreatury and w.id_wyprawy=ew.idWyprawy where ew.sektor=7
