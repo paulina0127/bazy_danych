@@ -276,7 +276,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sredni_czas_rezerwacji`()
 BEGIN
-SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(zs.czas_zakonczenia,r.godzina)))/count(r.nr_rezerwacji)) as średni_czas FROM zarezerwowane_stoliki zs, rezerwacje r where r.nr_rezerwacji=zs.rezerwacja and czas_zakonczenia is not null;
+SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(zs.czas_zakonczenia,r.godzina)))/count(distinct(zs.rezerwacja))) as średni_czas FROM zarezerwowane_stoliki zs, rezerwacje r where r.nr_rezerwacji=zs.rezerwacja and czas_zakonczenia is not null;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -293,4 +293,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-23 16:06:18
+-- Dump completed on 2020-12-23 20:55:45
